@@ -1,5 +1,5 @@
 # What is this?
-This is a small Python script that will retrieve official currecy exchange rates from the Bank of Lithuania, which you can also manually retrieve [here](https://www.lb.lt/lt/pagal-buhalterines-apskaitos-istatyma-formuojami-euro-ir-uzsienio-valiutu-santykiai).
+This is a small Python script that will retrieve official currecy exchange rates from the Bank of Lithuania, which you can also manually retrieve [here](https://www.lb.lt/lt/pagal-buhalterines-apskaitos-istatyma-formuojami-euro-ir-uzsienio-valiutu-santykiai). At the moment, it returns USD/EUR rate.
 
 # Running the tool
 ## Install dependencies
