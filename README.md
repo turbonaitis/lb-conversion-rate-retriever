@@ -4,7 +4,7 @@ This is a small Python script that will retrieve official currecy exchange rates
 # Running the tool
 ## Install dependencies
 ```
-$ virtualenv env
+$ python -m venv env
 $ source env/bin/activate
 $ pip install -r requirements.txt
 ```

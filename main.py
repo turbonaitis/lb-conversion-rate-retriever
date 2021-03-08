@@ -1,7 +1,7 @@
 import requests
 import fileinput
 import datetime
-from bs4 import BeautifulSoup
+import xml.etree.ElementTree as ET
 
 
 class converter:
@@ -15,13 +15,12 @@ class converter:
         if response.status_code != 200:
             raise "Non-OK response from LB"
 
-        rates = BeautifulSoup(response.text, "xml")
-
-        node = rates.find(self.get_exchange_rate_node_filter())
-        return node.santykis.text
-
-    def get_exchange_rate_node_filter(self):
-        return lambda tag: tag.name == "item" and tag.valiutos_kodas.text == self.currency
+        root = ET.fromstring(response.text)
+        for child in root.findall("item"):
+            currency_code = child.find("valiutos_kodas")
+            if currency_code.text == self.currency:
+                return child.find("santykis").text
+        raise Exception(f"Couldn't find node for {date}")
 
 
 def main():
@@ -29,8 +28,8 @@ def main():
     for line in fileinput.input():
         date_string = line.rstrip()
         datetime.datetime.strptime(date_string, '%Y-%m-%d')
-
-        print(calc.get_exchange_rate(date_string))
+        fx = calc.get_exchange_rate(date_string)
+        print(f"{date_string}, {fx}")
 
 
 if __name__ == "__main__":
